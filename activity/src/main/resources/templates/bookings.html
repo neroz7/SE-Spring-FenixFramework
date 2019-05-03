@@ -24,11 +24,10 @@
     <form class="form-inline"
           th:action="@{/providers/{codeProvider}/activities/{codeActivity}/offers/{externalId}/bookings(codeProvider=${offer.codeProvider},codeActivity=${offer.codeActivity},externalId=${offer.externalId})}"
           th:object="${booking}" method="post">
-        <label>NIF: </label> <input class="form-control input-sm" type="text"
-                                    size="9" th:field="*{nif}"/> <label>IBAN: </label> <input
-            class="form-control input-sm" type="text" size="20"
-            th:field="*{sourceIban}"/> <input class="btn btn-primary btn-sm"
-                                              type="submit" value="Submit"/>
+        <label>NIF: </label> <input class="form-control input-sm" type="text"size="9" th:field="*{nif}"/> 
+        <label>IBAN: </label> <input class="form-control input-sm" type="text" size="20"th:field="*{iban}"/> 
+        <label>AGE: </label> <input class="form-control input-sm" type="number" size="20"th:field="*{age}"/> 
+        <input class="btn btn-primary btn-sm"type="submit" value="Submit"/>
     </form>
     <br/>
     <h3>Bookings</h3>
@@ -37,14 +36,24 @@
         <tr>
             <th>NIF</th>
             <th>IBAN</th>
+            <th>AGE</th>
+            <th>CANCEL</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="booking: ${offer.reservations}">
 
             <td th:text="${booking.nif}">132452623</td>
-            <td th:text="${booking.sourceIban}">PT 89265897 8745982</td>
-        </tr>
+            <td th:text="${booking.iban}">PT 89265897 8745982</td>
+            <td th:text="${booking.age}">23</td>
+            <div th:if="${booking.cancellation}">
+                <td>CANCELLED</td>
+             </div>
+             <!-- ELSE -->
+             <div th:unless="${booking.cancellation}">
+                <td><a
+                    th:href="@{/providers/{codeProvider}/activities/{codeActivity}/offers/{externalId}/bookings/{reference}(codeProvider=${offer.codeProvider},codeActivity=${offer.codeActivity},externalId=${offer.externalId},reference=${booking.reference})}">CANCEL</a></td>
+             </div>
         </tbody>
     </table>
 </div>
