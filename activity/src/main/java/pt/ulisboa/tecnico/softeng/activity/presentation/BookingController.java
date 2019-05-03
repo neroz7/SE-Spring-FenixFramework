@@ -45,14 +45,32 @@ public class BookingController {
 	@RequestMapping(method = RequestMethod.POST)
 	public String bookingSubmit(Model model, @PathVariable String codeProvider, @PathVariable String codeActivity,
 			@PathVariable String externalId, @ModelAttribute RestActivityBookingData booking) {
-		logger.info("offerSubmit codeProvider:{}, codeActivity:{}, externalId:{}", codeProvider, codeActivity,
-				externalId);
+		logger.info("offerSubmit codeProvider:{}, codeActivity:{}, externalId:{}, age:{}", codeProvider, codeActivity,
+				externalId,booking.getAge());
 
 		try {
 			activityInterface.reserveActivity(externalId, booking);
 		} catch (ActivityException e) {
 			model.addAttribute("error", "Error: it was not possible to do the booking");
 			model.addAttribute("booking", booking);
+			model.addAttribute("offer", activityInterface.getActivityOfferDataByExternalId(externalId));
+			return "bookings";
+		}
+
+		return "redirect:/providers/" + codeProvider + "/activities/" + codeActivity + "/offers/" + externalId
+				+ "/bookings";
+	}
+	@RequestMapping(value ="/{reference}",method = RequestMethod.GET)
+	public String cancelBookingSubmit(Model model, @PathVariable String codeProvider, @PathVariable String codeActivity,
+			@PathVariable String externalId,@PathVariable String reference) {
+		logger.info("offerSubmit codeProvider:{}, codeActivity:{}, externalId:{},reference:{}", codeProvider, codeActivity,
+				externalId,reference);
+
+		try {
+			activityInterface.cancelReservation(reference);
+		} catch (ActivityException e) {
+			model.addAttribute("error", "Error: it was not possible to cancel reservation");
+			model.addAttribute("booking", new RestActivityBookingData());
 			model.addAttribute("offer", activityInterface.getActivityOfferDataByExternalId(externalId));
 			return "bookings";
 		}
