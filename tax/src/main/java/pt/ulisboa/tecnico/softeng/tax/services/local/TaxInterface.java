@@ -44,7 +44,9 @@ public class TaxInterface {
 
     @Atomic(mode = TxMode.WRITE)
     public static void createTaxPayer(TaxPayerData taxPayerData) {
+        System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAA");
         new TaxPayer(IRS.getIRSInstance(), taxPayerData.getNif(), taxPayerData.getName(), taxPayerData.getAddress());
+        System.out.println("YOooooooooo");
     }
 
     @Atomic(mode = TxMode.WRITE)
