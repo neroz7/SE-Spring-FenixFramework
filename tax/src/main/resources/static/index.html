@@ -5,8 +5,23 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
+    <script >
+        function submitForm() {
+            document.getElementById("yearForm").action = "/tax/taxes/" + document.getElementById("year").value;
+            form.submit();
+
+        }
+    </script>
 	<h2>Tax Manager</h2>
     <p><a href="/tax/payers">Manage Tax Payers</a></p>
     <p><a href="/tax/items">Manage Item Types</a></p>
+
+
+    <form id="yearForm" onSubmit="submitForm(this)">
+        <p>Consult Taxes by year</p> <label> Year: </label> <input type="number" min="1976" max="2099" step="1" value="2018" id="year"/> <input type="submit" name="Submit" value="Consult">
+    </form> 
+    
+    <!-- <button onclick="myFunction()">Click me</button> -->
+
 </body>
 </html>

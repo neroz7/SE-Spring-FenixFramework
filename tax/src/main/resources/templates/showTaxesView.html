@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Item Types</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet"
+	th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}" />
+<script th:src="@{/webjars/jquery/3.1.1/jquery.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
+</head>
+<body>
+	<div class="container">
+		<h2>
+			Taxes for year <span th:text="${year.intValue()}"></span>
+			<!-- <span th:text="${payer.name}">João</span> with NIF <span
+				th:text="${payer.nif}">12246765</span> -->
+		</h2>
+		<h3>Tax Returns: <span th:text="${returns.floatValue()}"></span></h3>
+		<h3>Taxes</h3>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Date</th>
+					<th>Iva</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="invoice: ${invoices}">
+					<td th:text="${invoice.date}">12/12/2018</td>
+					<td th:text="${invoice.iva}">4.33</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>
