@@ -26,6 +26,8 @@ public class BankData {
 
         this.setOperations(bank.getOperationSet().stream().sorted(Comparator.comparing(Operation::getType))
                 .map(c -> new BankOperationData(c)).collect(Collectors.toList()));
+
+        // private List<BankOperationData> operations;
     }
 
     public String getCode() {

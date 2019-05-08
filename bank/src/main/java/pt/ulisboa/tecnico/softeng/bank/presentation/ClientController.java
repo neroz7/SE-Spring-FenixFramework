@@ -1,5 +1,7 @@
 package pt.ulisboa.tecnico.softeng.bank.presentation;
 
+import java.util.ArrayList;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import pt.ulisboa.tecnico.softeng.bank.exception.BankException;
 import pt.ulisboa.tecnico.softeng.bank.services.local.BankInterface;
 import pt.ulisboa.tecnico.softeng.bank.services.local.dataobjects.BankData;
+import pt.ulisboa.tecnico.softeng.bank.services.local.dataobjects.BankOperationData;
 import pt.ulisboa.tecnico.softeng.bank.services.local.dataobjects.ClientData;
 
 @Controller
@@ -52,4 +55,21 @@ public class ClientController {
 
 		return "redirect:/banks/" + code + "/clients";
 	}
+
+	@RequestMapping(value = "/{ref}/cancel", method = RequestMethod.GET)
+	public String cancelOperation(Model model, @PathVariable String code, @PathVariable String ref, @ModelAttribute ClientData client) {
+		logger.info("operationCancel bankCode:{}, operationReference:{}", code, ref);
+
+		try {
+			BankInterface.cancelPayment(ref);
+		} catch (BankException be) {
+			model.addAttribute("error", "Error: it was not possible to create the client");
+			model.addAttribute("client", client);
+			model.addAttribute("bank", BankInterface.getBankDataByCode(code));
+			return "clients";
+		}
+
+		return "redirect:/banks/" + code + "/clients";
+	}
+	
 }
