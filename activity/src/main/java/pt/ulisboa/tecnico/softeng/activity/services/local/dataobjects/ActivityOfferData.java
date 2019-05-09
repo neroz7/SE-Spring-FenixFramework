@@ -22,7 +22,6 @@ public class ActivityOfferData {
 	private Integer capacity;
 	private Double amount;
 	private List<RestActivityBookingData> reservations;
-	private Integer vacancies;
 
 	public ActivityOfferData() {
 	}
@@ -114,12 +113,6 @@ public class ActivityOfferData {
 		this.name = name;
 	}
 	public int getVacancies() {
-		int count = 0;
-		for (RestActivityBookingData booking : getReservations()) {
-			if (booking.getCancellation()==null) {
-				count++;
-			}
-		}
-		return this.capacity-count;
+		return this.capacity-reservations.size();
 	}
 }
