@@ -9,16 +9,18 @@ public class RentACarData {
     private String nif;
     private String iban;
     private Integer numVehicles;
+    private Integer numPendingRents;
 
     public RentACarData() {
     }
 
-    public RentACarData(String code, String name, String nif, String iban, Integer numVehicles) {
+    public RentACarData(String code, String name, String nif, String iban, Integer numVehicles,Integer numPendingRents) {
         this.code = code;
         this.name = name;
         this.nif = nif;
         this.iban = iban;
         this.numVehicles = numVehicles;
+        this.numPendingRents = numPendingRents;
     }
 
     public Integer getNumVehicles() {
@@ -27,6 +29,13 @@ public class RentACarData {
 
     public void setNumVehicles(int numVehicles) {
         this.numVehicles = numVehicles;
+    }
+    public Integer getNumPendingRents() {
+        return numPendingRents;
+    }
+
+    public void setNumPendingRents(int numPendingRents) {
+        this.numPendingRents = numPendingRents;
     }
 
     public String getCode() {

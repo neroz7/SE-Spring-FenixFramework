@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Rooms</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <link rel="stylesheet"
+          th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}" />
+
+    <script th:src="@{/webjars/jquery/3.1.1/jquery.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
+</head>
+<body>
+<div class="container">
+    <h2>
+        Vehicles of Rent-A-Car <span th:text="${rentacar.name}">Rent-A-Car</span>
+    </h2>
+    <a class="btn btn-default pull-right" th:href="@{/rentacars}">Rent-A-Cars</a>
+    <br/>
+    <h3>Pending Rents </h3>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Reference</th>
+            <th>Plate</th>
+            <th>Driving License</th>
+            <th>Rent-A-Car</th>
+            <th>begin</th>
+            <th>end</th>
+            <th>Payment Reference</th>
+            <th>Invoice Reference</th>
+            <th>Cancellation Reference</th>
+            <th>Price</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="renting : ${pendingRents}">
+            <td th:text="${renting.reference}">XPTO</td>
+            <td th:text="${renting.plate}">XPTO</td>
+            <td th:text="${renting.drivingLicense}">XPTO</td>
+            <td th:text="${renting.rentACarCode}">XPTO</td>
+            <td th:text="${renting.begin}">XPTO</td>
+            <td th:text="${renting.end}">XPTO</td>
+            <td th:text="${renting.paymentReference}">XPTO</td>
+            <td th:text="${renting.invoiceReference}">XPTO</td>
+            <td th:text="${renting.cancellationReference}">XPTO</td>
+            <td th:text="${renting.price}">XPTO</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

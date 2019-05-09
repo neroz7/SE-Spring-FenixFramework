@@ -891,7 +891,7 @@
         <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="Define Broker Data" enabled="true">
           <stringProp name="filename">${testHome}/broker.txt</stringProp>
           <stringProp name="fileEncoding"></stringProp>
-          <stringProp name="variableNames">brokerCode,brokerName,nifAsSeller,nifAsBuyer,brokerIban</stringProp>
+          <stringProp name="variableNames">brokerCode,brokerName,nif,brokerIban</stringProp>
           <stringProp name="delimiter">,</stringProp>
           <boolProp name="quotedData">false</boolProp>
           <boolProp name="recycle">true</boolProp>
@@ -917,19 +917,12 @@
                 <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 <stringProp name="Argument.name">name</stringProp>
               </elementProp>
-              <elementProp name="nifAsSeller" elementType="HTTPArgument">
+              <elementProp name="nif" elementType="HTTPArgument">
                 <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                <stringProp name="Argument.value">${nifAsSeller}</stringProp>
+                <stringProp name="Argument.value">${nif}</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
                 <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                <stringProp name="Argument.name">nifAsSeller</stringProp>
-              </elementProp>
-              <elementProp name="nifAsBuyer" elementType="HTTPArgument">
-                <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                <stringProp name="Argument.value">${nifAsBuyer}</stringProp>
-                <stringProp name="Argument.metadata">=</stringProp>
-                <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                <stringProp name="Argument.name">nifAsBuyer</stringProp>
+                <stringProp name="Argument.name">nif</stringProp>
               </elementProp>
               <elementProp name="iban" elementType="HTTPArgument">
                 <boolProp name="HTTPArgument.always_encode">false</boolProp>
@@ -958,7 +951,7 @@
         <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="Define Client Data" enabled="true">
           <stringProp name="filename">${testHome}/brokerClient.txt</stringProp>
           <stringProp name="fileEncoding"></stringProp>
-          <stringProp name="variableNames">brokerCode,clientIban,nif,drivingLicense,age</stringProp>
+          <stringProp name="variableNames">brokerCode,clientIban,clientNif,drivingLicense,age</stringProp>
           <stringProp name="delimiter">,</stringProp>
           <boolProp name="quotedData">false</boolProp>
           <boolProp name="recycle">true</boolProp>
@@ -986,7 +979,7 @@
               </elementProp>
               <elementProp name="nif" elementType="HTTPArgument">
                 <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                <stringProp name="Argument.value">${nif}</stringProp>
+                <stringProp name="Argument.value">${clientNif}</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
                 <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 <stringProp name="Argument.name">nif</stringProp>
@@ -1025,7 +1018,7 @@
         <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="Define Adventure Data" enabled="true">
           <stringProp name="filename">${testHome}/adventure.txt</stringProp>
           <stringProp name="fileEncoding"></stringProp>
-          <stringProp name="variableNames">brokerCode,clientNif,begin,end,age,iban,margin,vehicle</stringProp>
+          <stringProp name="variableNames">brokerCode,clientNif,begin,end,age,iban,margin,vehicle,bookRoom</stringProp>
           <stringProp name="delimiter">,</stringProp>
           <boolProp name="quotedData">false</boolProp>
           <boolProp name="recycle">true</boolProp>
@@ -1072,12 +1065,12 @@
                 <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 <stringProp name="Argument.name">margin</stringProp>
               </elementProp>
-              <elementProp name="vehicle" elementType="HTTPArgument">
+              <elementProp name="rentVehicle" elementType="HTTPArgument">
                 <boolProp name="HTTPArgument.always_encode">false</boolProp>
                 <stringProp name="Argument.value">${vehicle}</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
                 <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                <stringProp name="Argument.name">vehicle</stringProp>
+                <stringProp name="Argument.name">rentVehicle</stringProp>
               </elementProp>
               <elementProp name="code" elementType="HTTPArgument">
                 <boolProp name="HTTPArgument.always_encode">false</boolProp>
@@ -1092,6 +1085,13 @@
                 <stringProp name="Argument.metadata">=</stringProp>
                 <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 <stringProp name="Argument.name">clientNif</stringProp>
+              </elementProp>
+              <elementProp name="bookRoom" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">${bookRoom}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                <stringProp name="Argument.name">bookRoom</stringProp>
               </elementProp>
             </collectionProp>
           </elementProp>
@@ -1357,7 +1357,7 @@
             <collectionProp name="Asserion.test_strings">
               <stringProp name="1998218233">Broker</stringProp>
               <stringProp name="63235404">BK126</stringProp>
-              <stringProp name="54393268">99730</stringProp>
+              <stringProp name="1448635108">100027</stringProp>
             </collectionProp>
             <stringProp name="Assertion.custom_message"></stringProp>
             <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
@@ -1421,7 +1421,7 @@
             <collectionProp name="Asserion.test_strings">
               <stringProp name="69915028">Hotel</stringProp>
               <stringProp name="63235406">BK128</stringProp>
-              <stringProp name="1448635039">100000</stringProp>
+              <stringProp name="1448635194">100050</stringProp>
             </collectionProp>
             <stringProp name="Assertion.custom_message"></stringProp>
             <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
@@ -1453,7 +1453,7 @@
             <collectionProp name="Asserion.test_strings">
               <stringProp name="-1784956946">Rent a Car</stringProp>
               <stringProp name="63235407">BK129</stringProp>
-              <stringProp name="1448635039">100000</stringProp>
+              <stringProp name="1448636062">100120</stringProp>
             </collectionProp>
             <stringProp name="Assertion.custom_message"></stringProp>
             <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
@@ -1485,7 +1485,7 @@
             <collectionProp name="Asserion.test_strings">
               <stringProp name="1779668962">Activity Provider</stringProp>
               <stringProp name="1960297417">BK1210</stringProp>
-              <stringProp name="1448635039">100000</stringProp>
+              <stringProp name="1448636000">100100</stringProp>
             </collectionProp>
             <stringProp name="Assertion.custom_message"></stringProp>
             <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
@@ -1598,7 +1598,7 @@
           <stringProp name="HTTPSampler.port">${taxPort}</stringProp>
           <stringProp name="HTTPSampler.protocol"></stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-          <stringProp name="HTTPSampler.path">/tax/payers/111111114/invoices</stringProp>
+          <stringProp name="HTTPSampler.path">/tax/payers/111111113/invoices</stringProp>
           <stringProp name="HTTPSampler.method">POST</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
           <boolProp name="HTTPSampler.auto_redirects">false</boolProp>

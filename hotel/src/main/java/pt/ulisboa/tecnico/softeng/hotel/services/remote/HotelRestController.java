@@ -26,7 +26,7 @@ public class HotelRestController {
 	@RequestMapping(value = "/reserve", method = RequestMethod.POST)
 	public ResponseEntity<RestRoomBookingData> reserve(@RequestBody RestRoomBookingData roomBookingData) {
 		logger.info("reserve type:{}, arrival:{}, departure:{}, nif:{}, iba:{}, adventureId:{}",
-				roomBookingData.getRoomType(), roomBookingData.getArrival(), roomBookingData.getDeparture(),
+				roomBookingData.getBookRoom(), roomBookingData.getArrival(), roomBookingData.getDeparture(),
 				roomBookingData.getBuyerNif(), roomBookingData.getBuyerIban(), roomBookingData.getAdventureId());
 		try {
 			return new ResponseEntity<RestRoomBookingData>(hi.reserveRoom(roomBookingData), HttpStatus.OK);

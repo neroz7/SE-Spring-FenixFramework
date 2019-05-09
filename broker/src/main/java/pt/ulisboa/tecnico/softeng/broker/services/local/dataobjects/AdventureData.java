@@ -168,6 +168,9 @@ public class AdventureData {
     public void setMargin(long margin) {
         this.margin = Long.valueOf(margin).doubleValue() * Adventure.SCALE;
     }
+    public void setMargin(Double margin) {
+        this.margin = margin;
+    }
 
     public Adventure.BookRoom getBookRoom() {
         return this.bookRoom;

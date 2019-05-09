@@ -32,6 +32,7 @@
             <th>NIF</th>
             <th>IBAN</th>
             <th>#Vehicles</th>
+            <th>Pending Rents</th>
         </tr>
         </thead>
         <tbody>
@@ -42,6 +43,11 @@
             <td>
                 <a th:href="@{/rentacars/rentacar/{code}/vehicles(code=${rentacar.code})}">
                     <span th:text="${rentacar.numVehicles}">Vehicles</span>
+                </a>
+            </td>
+            <td>
+                <a th:href="@{/rentacars/rentacar/{code}/pendingrents(code=${rentacar.code})}">
+                    <span th:text="${rentacar.numPendingRents}">Pending Rents</span>
                 </a>
             </td>
         </tr>
