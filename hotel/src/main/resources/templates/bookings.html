@@ -47,8 +47,16 @@
 					<td th:text="${booking.buyerNif}">123456779</td>
 					<td th:text="${booking.buyerIban}">CGD 1235 7487439 8498</td>
 					<td th:text="${booking.price}">49.99</td>
-					<td th:text="${booking.cancellation}">xpto3456CANCEL</td>
-					<td th:text="${booking.cancellationDate}">07/12/2016</td>
+					<div th:if="${booking.cancellation}">
+						<td>CANCELLED</td>
+					 </div>
+					 <!-- ELSE -->
+					 <div th:unless="${booking.cancellation}">
+						<td><a 
+							th:href="@{/hotels/{code}/rooms/{number}/bookings/{ref}/cancel(code=${room.hotelCode},number=${room.number},ref=${booking.reference})}">CANCEL</a></td>
+					 </div>
+					 <td th:text="${booking.cancellationDate}">07/12/2016</td>
+					 					
 				</tr>
 			</tbody>
 		</table>
