@@ -2,6 +2,8 @@ package pt.ulisboa.tecnico.softeng.bank.services.remote.dataobjects;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.joda.time.DateTime;
+
+import pt.ulisboa.tecnico.softeng.bank.domain.Bank;
 import pt.ulisboa.tecnico.softeng.bank.domain.Operation;
 
 public class RestBankOperationData {
@@ -67,6 +69,10 @@ public class RestBankOperationData {
 
     public void setValue(long value) {
         this.value = value;
+    }
+
+    public void setValue(Double value) {
+        this.value = Math.round(value * Bank.SCALE);
     }
 
     public DateTime getTime() {

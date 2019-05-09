@@ -48,20 +48,33 @@
 					<th>Time</th>
  					<th>Reference</th>
  					<th>Type</th>
-					 <th>Source Iban</th>
-					 <th>Target Iban</th>
- 					<th>Value</th>
+					<th>Source Iban</th>
+					<th>Target Iban</th>
+					<th>Value</th>
+					<th>cancellation</th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr th:each="operation: ${bank.operations}">
+				<tr th:each="operation: ${#lists.sort(bank.operations)}">
 					<td th:text="${operation.time}">2017/04/01</td>
 					<td th:text="${operation.reference}">BK12344567</td>
 					<td th:text="${operation.type}">DEPOSIT</td>
 					<td th:text="${operation.sourceIban}">123456</td>
-					<td th:if="${operation.type == 'TRANSFER'}" th:text="${operation.sourceIban}">123456</td>
-					<td th:unless="${operation.type == 'TRANSFER'}" th:text="-">123456</td>
-					<td th:text="${operation.value}">200</td>
+					<td th:if="${operation.type == 'TRANSFER'}" th:text="${operation.targetIban}">123456</td>
+					<td th:unless="${operation.type == 'TRANSFER'}">-</td>
+					<td th:text="${#numbers.formatDecimal(operation.value, 1, 2)}">200</td>
+
+					<div th:if="${operation.cancellation}">
+					<td>CANCELLED</td>
+					</div>
+					<!-- ELSE -->
+					<div th:unless="${operation.cancellation}">
+						<td th:if="${operation.type != 'TRANSFER' and operation.fromTransfer or operation.transactionSource == 'REVERT'}">-</td>
+						<td th:unless="${operation.type != 'TRANSFER' and operation.fromTransfer or operation.transactionSource == 'REVERT'}">
+								<a class="btn btn-default pull-right"
+								th:href="@{/banks/{code}/clients/{ref}/cancel(code=${bank.code},ref=${operation.reference})}">UNDO</a>
+						</td>
+					</div>
 				</tr>
 			</tbody>
 		</table>
