@@ -897,7 +897,7 @@
         <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="Define Broker Data" enabled="true">
           <stringProp name="filename">${testHome}/broker.txt</stringProp>
           <stringProp name="fileEncoding"></stringProp>
-          <stringProp name="variableNames">brokerCode,brokerName,nifAsSeller,nifAsBuyer,brokerIban</stringProp>
+          <stringProp name="variableNames">brokerCode,brokerName,nif,brokerIban</stringProp>
           <stringProp name="delimiter">,</stringProp>
           <boolProp name="quotedData">false</boolProp>
           <boolProp name="recycle">true</boolProp>
@@ -923,19 +923,12 @@
                 <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 <stringProp name="Argument.name">name</stringProp>
               </elementProp>
-              <elementProp name="nifAsSeller" elementType="HTTPArgument">
+              <elementProp name="nif" elementType="HTTPArgument">
                 <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                <stringProp name="Argument.value">${nifAsSeller}</stringProp>
+                <stringProp name="Argument.value">${nif}</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
                 <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                <stringProp name="Argument.name">nifAsSeller</stringProp>
-              </elementProp>
-              <elementProp name="nifAsBuyer" elementType="HTTPArgument">
-                <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                <stringProp name="Argument.value">${nifAsBuyer}</stringProp>
-                <stringProp name="Argument.metadata">=</stringProp>
-                <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                <stringProp name="Argument.name">nifAsBuyer</stringProp>
+                <stringProp name="Argument.name">nif</stringProp>
               </elementProp>
               <elementProp name="iban" elementType="HTTPArgument">
                 <boolProp name="HTTPArgument.always_encode">false</boolProp>
@@ -964,7 +957,7 @@
         <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="Define Client Data" enabled="true">
           <stringProp name="filename">${testHome}/brokerClient.txt</stringProp>
           <stringProp name="fileEncoding"></stringProp>
-          <stringProp name="variableNames">brokerCode,clientIban,nif,drivingLicense,age</stringProp>
+          <stringProp name="variableNames">brokerCode,clientIban,clientNif,drivingLicense,age</stringProp>
           <stringProp name="delimiter">,</stringProp>
           <boolProp name="quotedData">false</boolProp>
           <boolProp name="recycle">true</boolProp>
@@ -992,7 +985,7 @@
               </elementProp>
               <elementProp name="nif" elementType="HTTPArgument">
                 <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                <stringProp name="Argument.value">${nif}</stringProp>
+                <stringProp name="Argument.value">${clientNif}</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
                 <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 <stringProp name="Argument.name">nif</stringProp>
@@ -1036,7 +1029,7 @@
           <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="Define Adventure Data" enabled="true">
             <stringProp name="filename">${testHome}/adventure.txt</stringProp>
             <stringProp name="fileEncoding"></stringProp>
-            <stringProp name="variableNames">brokerCode,clientNif,begin,end,age,iban,margin,vehicle</stringProp>
+            <stringProp name="variableNames">code,clientNif,begin,end,age,iban,margin,rentVehicle,bookRoom</stringProp>
             <stringProp name="delimiter">,</stringProp>
             <boolProp name="quotedData">false</boolProp>
             <boolProp name="recycle">true</boolProp>
@@ -1048,6 +1041,20 @@
           <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Create Adventures" enabled="true">
             <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
               <collectionProp name="Arguments.arguments">
+                <elementProp name="code" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">${brokerCode}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                  <stringProp name="Argument.name">code</stringProp>
+                </elementProp>
+                <elementProp name="clientNif" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">${clientNif}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                  <stringProp name="Argument.name">clientNif</stringProp>
+                </elementProp>
                 <elementProp name="begin" elementType="HTTPArgument">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
                   <stringProp name="Argument.value">${begin}</stringProp>
@@ -1083,26 +1090,19 @@
                   <boolProp name="HTTPArgument.use_equals">true</boolProp>
                   <stringProp name="Argument.name">margin</stringProp>
                 </elementProp>
-                <elementProp name="vehicle" elementType="HTTPArgument">
+                <elementProp name="rentVehicle" elementType="HTTPArgument">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                  <stringProp name="Argument.value">${vehicle}</stringProp>
+                  <stringProp name="Argument.value">${rentVehicle}</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
                   <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                  <stringProp name="Argument.name">vehicle</stringProp>
+                  <stringProp name="Argument.name">rentVehicle</stringProp>
                 </elementProp>
-                <elementProp name="code" elementType="HTTPArgument">
+                <elementProp name="bookRoom" elementType="HTTPArgument">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                  <stringProp name="Argument.value">${brokerCode}</stringProp>
+                  <stringProp name="Argument.value">${bookRoom}</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
                   <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                  <stringProp name="Argument.name">code</stringProp>
-                </elementProp>
-                <elementProp name="clientNif" elementType="HTTPArgument">
-                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                  <stringProp name="Argument.value">${clientNif}</stringProp>
-                  <stringProp name="Argument.metadata">=</stringProp>
-                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                  <stringProp name="Argument.name">clientNif</stringProp>
+                  <stringProp name="Argument.name">bookRoom</stringProp>
                 </elementProp>
               </collectionProp>
             </elementProp>
